@@ -88,6 +88,10 @@ Table dropped.
 ====================================================================================================================================================================================
 Q7: Modify the emp_salary column in the employee table to allow values up to
 DECIMAL(12, 2).
+SQL> ALTER TABLE employee109 MODIFY emp_salary DECIMAL(12, 2);
+
+Table altered.
+
 SQL> describe employee109
  Name   Null?    Type
  ----------------------------------------- -------- ----------------------------
