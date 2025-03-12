@@ -475,6 +475,54 @@ EMP_NAME					   EMP_SALARY
 Joseph Sunny						60000
 Santhosh						55000
 Shidha							54000
+================================================================================================================================================================
+Q20: Write a query that groups employees by dept_id and shows the total salary per
+department.
+
+SQL> SELECT dept_id, SUM(emp_salary) AS total_salary FROM employee109 GROUP BY dept_id;
+
+DEPT_ID    TOTAL_SALARY
+---------- ------------
+104		  62000
+105		  68000
+101		  54000
+103		  75000
+102		 115000
+=================================================================================================================================================================================================================
+Q21: Retrieve the department-wise average salary, but only for those departments with an
+average salary above 60000.
+
+SQL> SELECT dept_id, AVG(emp_salary) AS avg_salary FROM employee109 GROUP BY dept_id HAVING AVG(emp_salary) > 60000;
+
+DEPT_ID    AVG_SALARY
+---------- ----------
+104		62000
+105		68000
+103		75000
+===================================================================================================================================================================================================================================
+Q22: List the departments and the number of employees in each department who earn
+above 50000.
+
+SQL> SELECT dept_id, COUNT(*) AS num_employees FROM employee109 WHERE emp_salary > 50000 GROUP BY dept_id;
+
+DEPT_ID    NUM_EMPLOYEES
+---------- -------------
+104		       1
+105		       1
+101		       1
+103		       1
+102		       2
+============================================================================================================================================================================
+Q23: Use HAVING to list departments that have more than 3 employees.
+
+SQL> SELECT dept_id, COUNT(*) AS num_employees FROM employee109 GROUP BY dept_id HAVING COUNT(*) > 3;
+
+DEPT_ID    NUM_EMPLOYEES
+---------- -------------
+102		       4
+=============================================================================================================================================================================
+
+
 
 
 
