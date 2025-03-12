@@ -380,3 +380,101 @@ EMP_EMAIL
 
 6   Shidha   54000
 05-DEC-21 101
+===================================================================================================================================================================
+Q14: Write a SELECT query to list all employees with their emp_id, emp_name, and
+emp_salary.
+SQL> SELECT emp_id, emp_name, emp_salary FROM employee109;
+
+EMP_ID	   EMP_NAME					      EMP_SALARY
+---------- -------------------------------------------------- ----------
+2	   Santhosh						   55000
+3	   Sona Mary						   75000
+4	   Sujesh						   62000
+5	   Deepa						   68000
+6	   Shidha						   54000
+==============================================================================================================================================================
+Q15: Retrieve the emp_name, emp_salary, and emp_join_date for employees whose
+salary is greater than 50000.
+SQL> SELECT emp_name, emp_salary, emp_joindate FROM employee109 WHERE emp_salary > 50000;
+
+EMP_NAME					   EMP_SALARY EMP_JOIND
+-------------------------------------------------- ---------- ---------
+Santhosh						55000 01-JUN-20
+Sona Mary						75000 15-JUL-19
+Sujesh							62000 10-AUG-18
+Deepa							68000 20-SEP-17
+Shidha							54000 05-DEC-21
+===========================================================================================================================================
+Q16: List employees in the employee table ordered by emp_salary in descending order.
+
+SQL> SELECT * FROM employee109 ORDER BY emp_salary DESC;
+
+EMP_ID	   EMP_NAME					      EMP_SALARY
+---------- -------------------------------------------------- ----------
+EMP_JOIND DEPT_ID
+--------- ----------
+EMP_EMAIL
+--------------------------------------------------------------------------------
+3	   Sona Mary						   75000
+15-JUL-19 103
+
+
+5	   Deepa						   68000
+20-SEP-17 105
+
+
+EMP_ID	   EMP_NAME					      EMP_SALARY
+---------- -------------------------------------------------- ----------
+EMP_JOIND DEPT_ID
+--------- ----------
+EMP_EMAIL
+--------------------------------------------------------------------------------
+
+4	   Sujesh						   62000
+10-AUG-18 104
+
+
+2	   Santhosh						   55000
+01-JUN-20 102
+
+EMP_ID	   EMP_NAME					      EMP_SALARY
+---------- -------------------------------------------------- ----------
+EMP_JOIND DEPT_ID
+--------- ----------
+EMP_EMAIL
+--------------------------------------------------------------------------------
+
+
+6	   Shidha						   54000
+05-DEC-21 101
+============================================================================================================================================
+Q17: Retrieve all employees' names and salaries who joined after 01-01-2020.
+
+SQL> SELECT emp_name, emp_salary FROM employee109 WHERE emp_joindate > TO_DATE('01-01-2020', 'DD-MM-YYYY');
+
+EMP_NAME					   EMP_SALARY
+-------------------------------------------------- ----------
+Santhosh						55000
+Shidha							54000
+======================================================================================================================================================================
+Q18: Write a query to select all employees whose name starts with "J"
+
+SQL> SELECT emp_id, emp_name, emp_salary FROM employee109 WHERE emp_name LIKE 'J%';
+
+EMP_ID	   EMP_NAME					      EMP_SALARY
+---------- -------------------------------------------------- ----------
+7	   Joseph Sunny 					   60000
+================================================================================================================================================
+Q19: Select the emp_name and emp_salary for employees whose salary is between 40000
+and 60000.
+
+SQL> SELECT emp_name, emp_salary FROM employee109 WHERE emp_salary BETWEEN 40000 AND 60000;
+
+EMP_NAME					   EMP_SALARY
+-------------------------------------------------- ----------
+Joseph Sunny						60000
+Santhosh						55000
+Shidha							54000
+
+
+
