@@ -1,15 +1,5 @@
-sqlplus mca109/mca109@172.16.50.33/FISAT
-
-SQL*Plus: Release 23.0.0.0.0 - Production on Wed Mar 19 10:01:20 2025
-Version 23.4.0.24.05
-
-Copyright (c) 1982, 2024, Oracle.  All rights reserved.
-
-Last Successful login time: Wed Mar 12 2025 09:20:35 +05:30
-
-Connected to:
-Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-Version 19.9.1.0.0
+Q24: Write a query to find the names of employees who have a salary greater than the
+average salary in their department.
 
 SQL> select emp_name from employee109 where emp_salary>(select avg(emp_salary) from employee109 where dept_id=employee109.dept_id);
 
@@ -19,36 +9,9 @@ Joseph Sunny
 Sona Mary
 Sujesh
 Deepa
-
-SQL> select emp_name,emp_salary from employee109 where dept_id in (select dept_id from department109 where dept_location='Ernakulam');
-
-no rows selected
-
-SQL> SELECT dept_id, dept_name, dept_location FROM department109;
-
-DEPT_ID    DEPT_NAME		DEPT_LOCATION
----------- -------------------- --------------------
-101	   Computer Science	NorthBlk
-102	   Finance		EastBlk
-103	   Mechanical		SouthBlk
-104	   Civil		West Blk
-105	   MCA			NorthBlk
-
-SQL> UPDATE department109
-SET dept_location = 'Ernakulam'
-WHERE dept_id = '101';
-  2    3  
-1 row updated.
-
-SQL> SELECT dept_id, dept_name, dept_location FROM department109;
-
-DEPT_ID    DEPT_NAME		DEPT_LOCATION
----------- -------------------- --------------------
-101	   Computer Science	Ernakulam
-102	   Finance		EastBlk
-103	   Mechanical		SouthBlk
-104	   Civil		West Blk
-105	   MCA			NorthBlk
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q25: Select the emp_name and emp_salary of employees who are in departments that are
+located in 'Ernakulam'.
 
 SQL> select emp_name,emp_salary from employee109 where dept_id in (select dept_id from department109 where dept_location='Ernakulam');
 
@@ -56,6 +19,7 @@ EMP_NAME					   EMP_SALARY
 -------------------------------------------------- ----------
 Shidha							54000
 
+Q26: Find the emp_name of employees who earn more than the highest salary in department 102.
 SQL> select emp_name from employee109 where emp_salary>(select max(emp_salary) from employee109 where dept_id=102);
 
 EMP_NAME
@@ -64,5 +28,4 @@ Sona Mary
 Sujesh
 Deepa
 
-SQL> 
 
