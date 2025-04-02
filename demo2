@@ -27,5 +27,32 @@ EMP_NAME
 Sona Mary
 Sujesh
 Deepa
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q27: Write a query that returns the department name of the department with the highest
+total salary.
+
+SQL> select dept_name from department109 where dept_id = (select dept_id from employee109 group by dept_id order by sum(emp_salary) desc fetch first 1 row only);
+
+DEPT_NAME
+--------------------
+Finance
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+Q28: Find the emp_id and emp_name of employees working in departments with less than 10 employees
+
+SQL> select emp_id, emp_name from employee109 where dept_id in (select dept_id from employee109 group by dept_id having count(*) < 10);
+
+EMP_ID	   EMP_NAME
+---------- --------------------------------------------------
+4	   Sujesh
+5	   Deepa
+6	   Shidha
+3	   Sona Mary
+7	   Joseph Sunny
+12	   Sophia Joshy
+15	   Karthik K
+2	   Santhosh
+
+8 rows selected.
+
 
 
