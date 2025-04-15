@@ -27,3 +27,31 @@ End;
 /
 
 
+SQL> @mark
+Enter value for name: sona
+old  12:   name:='&name';
+new  12:   name:='sona';
+Enter value for rollno: 33
+old  13:   rollno:=&rollno;
+new  13:   rollno:=33;
+Enter value for mark1: 36
+old  14:   mark1:=&mark1;
+new  14:   mark1:=36;
+Enter value for mark2: 37
+old  15:   mark2:=&mark2;
+new  15:   mark2:=37;
+Enter value for mark3: 39
+old  16:   mark3:=&mark3;
+new  16:   mark3:=39;
+Enter value for mark4: 34
+old  17:   mark4:=&mark4;
+new  17:   mark4:=34;
+Student details
+Name:sona
+Roll no:33
+Total mark=146
+Percentage36.5
+
+PL/SQL procedure successfully completed.
+
+
