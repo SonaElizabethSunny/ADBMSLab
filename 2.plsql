@@ -18,3 +18,12 @@ DBMS_OUTPUT.PUT_LINE ('Department '||v_empdepid);
 END IF;
 END;
 /
+
+
+SQL> @p2
+The highest Salary is 75000
+The person having highest salary is Sona Mary
+Department 103
+
+PL/SQL procedure successfully completed.
+
