@@ -1,0 +1,136 @@
+developer@ccfl6-pc50:~$ mongo 172.16.50.34/mca49
+MongoDB shell version v4.2.15
+connecting to: mongodb://172.16.50.34:27017/mca49?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("816e7fc7-d026-448f-af34-bac1b5f90276") }
+MongoDB server version: 8.0.9
+WARNING: shell and server versions do not match
+Welcome to the MongoDB shell.
+For interactive help, type "help".
+For more comprehensive documentation, see
+	https://docs.mongodb.com/
+Questions? Try the MongoDB Developer Community Forums
+	https://community.mongodb.com
+Server has startup warnings: 
+{"t":{"$date":"2025-05-02T10:36:33.832+05:30"},"s":"I",  "c":"STORAGE",  "id":22297,   "ctx":"initandlisten","msg":"Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem","tags":["startupWarnings"]}
+
+{"t":{"$date":"2025-05-02T10:36:35.922+05:30"},"s":"W",  "c":"CONTROL",  "id":22120,   "ctx":"initandlisten","msg":"Access control is not enabled for the database. Read and write access to data and configuration is unrestricted","tags":["startupWarnings"]}
+
+{"t":{"$date":"2025-05-02T10:36:35.922+05:30"},"s":"W",  "c":"CONTROL",  "id":9068900, "ctx":"initandlisten","msg":"For customers running the current memory allocator, we suggest changing the contents of the following sysfsFile","attr":{"allocator":"tcmalloc-google","sysfsFile":"/sys/kernel/mm/transparent_hugepage/defrag","currentValue":"madvise","desiredValue":"defer+madvise"},"tags":["startupWarnings"]}
+
+{"t":{"$date":"2025-05-02T10:36:35.922+05:30"},"s":"W",  "c":"CONTROL",  "id":8640302, "ctx":"initandlisten","msg":"We suggest setting the contents of sysfsFile to 0.","attr":{"sysfsFile":"/sys/kernel/mm/transparent_hugepage/khugepaged/max_ptes_none","currentValue":511},"tags":["startupWarnings"]}
+
+{"t":{"$date":"2025-05-02T10:36:35.922+05:30"},"s":"W",  "c":"NETWORK",  "id":5123300, "ctx":"initandlisten","msg":"vm.max_map_count is too low","attr":{"currentValue":65530,"recommendedMinimum":102400,"maxConns":51200},"tags":["startupWarnings"]}
+
+{"t":{"$date":"2025-05-02T10:36:35.922+05:30"},"s":"W",  "c":"CONTROL",  "id":8386700, "ctx":"initandlisten","msg":"We suggest setting swappiness to 0 or 1, as swapping can cause performance problems.","attr":{"sysfsFile":"/proc/sys/vm/swappiness","currentValue":60},"tags":["startupWarnings"]}
+
+> db
+mca49
+> show dbs
+MCA28   0.000GB
+MCA30   0.000GB
+MCA41   0.000GB
+MCA42   0.000GB
+admin   0.000GB
+config  0.000GB
+data2   0.000GB
+db      0.000GB
+local   0.000GB
+mca08   0.000GB
+mca1    0.000GB
+mca104  0.000GB
+mca105  0.000GB
+mca111  0.000GB
+mca112  0.000GB
+mca114  0.000GB
+mca116  0.000GB
+mca119  0.000GB
+mca14   0.000GB
+mca15   0.000GB
+mca16   0.000GB
+mca17   0.000GB
+mca2    0.000GB
+mca20   0.000GB
+mca21   0.000GB
+mca35   0.000GB
+mca47   0.000GB
+mca48   0.000GB
+mca5    0.000GB
+mca54   0.000GB
+mca57   0.000GB
+mca6    0.000GB
+mca61   0.000GB
+mca63   0.000GB
+mca64   0.000GB
+mca70   0.000GB
+mca71   0.000GB
+mca72   0.000GB
+mca79   0.000GB
+mca83   0.000GB
+mca85   0.000GB
+mca86   0.000GB
+mca87   0.000GB
+test1   0.000GB
+> use shimongo
+switched to db shimongo
+> use mca49
+switched to db mca49
+> db.createCollection("student")
+{ "ok" : 1 }
+> db.student.insertMany([
+...   { rollno: 1, name: "Sujith", phoneno: "9876543210", marks: 85, city: "Thrissur", year: 2020, score: 88, joindate: new Date("2020-04-10") },
+...   { rollno: 2, name: "Sarayu", phoneno: "9123456780", marks: 95, city: "Thrissur", year: 2020, score: 93, joindate: new Date("2021-06-15") },
+...   { rollno: 3, name: "Ajay", phoneno: "9988776655", marks: 76, city: "Ernakulam", year: 2019, score: 80, joindate: new Date("2019-03-10") },
+...   { rollno: 4, name: "Divya", phoneno: "9786543211", marks: 91, city: "Thrissur", year: 2022, score: 95, joindate: new Date("2022-07-12") },
+...   { rollno: 5, name: "Anil", phoneno: "9871234567", marks: 67, city: "Kochi", year: 2023, score: 70, joindate: new Date("2023-01-05") }
+... ])
+{
+	"acknowledged" : true,
+	"insertedIds" : [
+		ObjectId("681854ef77fdcb0ee62b6771"),
+		ObjectId("681854ef77fdcb0ee62b6772"),
+		ObjectId("681854ef77fdcb0ee62b6773"),
+		ObjectId("681854ef77fdcb0ee62b6774"),
+		ObjectId("681854ef77fdcb0ee62b6775")
+	]
+}
+> db.student.find({}, { _id: 0, rollno: 1, name: 1, phoneno: 1, marks: 1, city: 1 })
+{ "rollno" : 1, "name" : "Sujith", "phoneno" : "9876543210", "marks" : 85, "city" : "Thrissur" }
+{ "rollno" : 2, "name" : "Sarayu", "phoneno" : "9123456780", "marks" : 95, "city" : "Thrissur" }
+{ "rollno" : 3, "name" : "Ajay", "phoneno" : "9988776655", "marks" : 76, "city" : "Ernakulam" }
+{ "rollno" : 4, "name" : "Divya", "phoneno" : "9786543211", "marks" : 91, "city" : "Thrissur" }
+{ "rollno" : 5, "name" : "Anil", "phoneno" : "9871234567", "marks" : 67, "city" : "Kochi" }
+> db.student.find({ score: { $gt: 90 }, city: "Thrissur" })
+{ "_id" : ObjectId("681854ef77fdcb0ee62b6772"), "rollno" : 2, "name" : "Sarayu", "phoneno" : "9123456780", "marks" : 95, "city" : "Thrissur", "year" : 2020, "score" : 93, "joindate" : ISODate("2021-06-15T00:00:00Z") }
+{ "_id" : ObjectId("681854ef77fdcb0ee62b6774"), "rollno" : 4, "name" : "Divya", "phoneno" : "9786543211", "marks" : 91, "city" : "Thrissur", "year" : 2022, "score" : 95, "joindate" : ISODate("2022-07-12T00:00:00Z") }
+> db.student.updateOne({ name: "Sujith" }, { $set: { phoneno: "9999999999" } })
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.student.find({ name: "Sujith" })
+{ "_id" : ObjectId("681854ef77fdcb0ee62b6771"), "rollno" : 1, "name" : "Sujith", "phoneno" : "9999999999", "marks" : 85, "city" : "Thrissur", "year" : 2020, "score" : 88, "joindate" : ISODate("2020-04-10T00:00:00Z") }
+> db.student.updateMany({}, { $set: { year: 2021 } })
+{ "acknowledged" : true, "matchedCount" : 5, "modifiedCount" : 5 }
+> db.student.find()
+{ "_id" : ObjectId("681854ef77fdcb0ee62b6771"), "rollno" : 1, "name" : "Sujith", "phoneno" : "9999999999", "marks" : 85, "city" : "Thrissur", "year" : 2021, "score" : 88, "joindate" : ISODate("2020-04-10T00:00:00Z") }
+{ "_id" : ObjectId("681854ef77fdcb0ee62b6772"), "rollno" : 2, "name" : "Sarayu", "phoneno" : "9123456780", "marks" : 95, "city" : "Thrissur", "year" : 2021, "score" : 93, "joindate" : ISODate("2021-06-15T00:00:00Z") }
+{ "_id" : ObjectId("681854ef77fdcb0ee62b6773"), "rollno" : 3, "name" : "Ajay", "phoneno" : "9988776655", "marks" : 76, "city" : "Ernakulam", "year" : 2021, "score" : 80, "joindate" : ISODate("2019-03-10T00:00:00Z") }
+{ "_id" : ObjectId("681854ef77fdcb0ee62b6774"), "rollno" : 4, "name" : "Divya", "phoneno" : "9786543211", "marks" : 91, "city" : "Thrissur", "year" : 2021, "score" : 95, "joindate" : ISODate("2022-07-12T00:00:00Z") }
+{ "_id" : ObjectId("681854ef77fdcb0ee62b6775"), "rollno" : 5, "name" : "Anil", "phoneno" : "9871234567", "marks" : 67, "city" : "Kochi", "year" : 2021, "score" : 70, "joindate" : ISODate("2023-01-05T00:00:00Z") }
+> db.student.find({ name: "Sarayu" }, { _id: 0, city: 1 })
+{ "city" : "Thrissur" }
+> db.student.countDocuments({ joindate: { $gt: new Date("2020-05-01") } })
+
+3
+> db.student.find().sort({ name: 1 })
+{ "_id" : ObjectId("681854ef77fdcb0ee62b6773"), "rollno" : 3, "name" : "Ajay", "phoneno" : "9988776655", "marks" : 76, "city" : "Ernakulam", "year" : 2021, "score" : 80, "joindate" : ISODate("2019-03-10T00:00:00Z") }
+{ "_id" : ObjectId("681854ef77fdcb0ee62b6775"), "rollno" : 5, "name" : "Anil", "phoneno" : "9871234567", "marks" : 67, "city" : "Kochi", "year" : 2021, "score" : 70, "joindate" : ISODate("2023-01-05T00:00:00Z") }
+{ "_id" : ObjectId("681854ef77fdcb0ee62b6774"), "rollno" : 4, "name" : "Divya", "phoneno" : "9786543211", "marks" : 91, "city" : "Thrissur", "year" : 2021, "score" : 95, "joindate" : ISODate("2022-07-12T00:00:00Z") }
+{ "_id" : ObjectId("681854ef77fdcb0ee62b6772"), "rollno" : 2, "name" : "Sarayu", "phoneno" : "9123456780", "marks" : 95, "city" : "Thrissur", "year" : 2021, "score" : 93, "joindate" : ISODate("2021-06-15T00:00:00Z") }
+{ "_id" : ObjectId("681854ef77fdcb0ee62b6771"), "rollno" : 1, "name" : "Sujith", "phoneno" : "9999999999", "marks" : 85, "city" : "Thrissur", "year" : 2021, "score" : 88, "joindate" : ISODate("2020-04-10T00:00:00Z") }
+> db.student.updateMany({}, [
+...   { $set: { town: "$city" } },
+...   { $unset: "city" }
+... ])
+{ "acknowledged" : true, "matchedCount" : 5, "modifiedCount" : 5 }
+> db.student.deleteOne({ name: "Sujith" })
+{ "acknowledged" : true, "deletedCount" : 1 }
+> 
+
