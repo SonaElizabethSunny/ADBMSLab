@@ -1,3 +1,5 @@
+1. Install the MongoDB Compass GUI and configure it.
+
 developer@ccfl6-pc50:~$ mongo 172.16.50.34/mca49
 MongoDB shell version v4.2.15
 connecting to: mongodb://172.16.50.34:27017/mca49?compressors=disabled&gssapiServiceName=mongodb
@@ -25,57 +27,18 @@ Server has startup warnings:
 
 > db
 mca49
-> show dbs
-MCA28   0.000GB
-MCA30   0.000GB
-MCA41   0.000GB
-MCA42   0.000GB
-admin   0.000GB
-config  0.000GB
-data2   0.000GB
-db      0.000GB
-local   0.000GB
-mca08   0.000GB
-mca1    0.000GB
-mca104  0.000GB
-mca105  0.000GB
-mca111  0.000GB
-mca112  0.000GB
-mca114  0.000GB
-mca116  0.000GB
-mca119  0.000GB
-mca14   0.000GB
-mca15   0.000GB
-mca16   0.000GB
-mca17   0.000GB
-mca2    0.000GB
-mca20   0.000GB
-mca21   0.000GB
-mca35   0.000GB
-mca47   0.000GB
-mca48   0.000GB
-mca5    0.000GB
-mca54   0.000GB
-mca57   0.000GB
-mca6    0.000GB
-mca61   0.000GB
-mca63   0.000GB
-mca64   0.000GB
-mca70   0.000GB
-mca71   0.000GB
-mca72   0.000GB
-mca79   0.000GB
-mca83   0.000GB
-mca85   0.000GB
-mca86   0.000GB
-mca87   0.000GB
-test1   0.000GB
-> use shimongo
-switched to db shimongo
 > use mca49
 switched to db mca49
+
+2. Create a collection student consists of details like rollno, name, phoneno, marks, city,
+year of course, score.
+
 > db.createCollection("student")
 { "ok" : 1 }
+
+3. Insert the details of the multiple students (atleast 5) in the form of documents in the
+student collection.
+
 > db.student.insertMany([
 ...   { rollno: 1, name: "Sujith", phoneno: "9876543210", marks: 85, city: "Thrissur", year: 2020, score: 88, joindate: new Date("2020-04-10") },
 ...   { rollno: 2, name: "Sarayu", phoneno: "9123456780", marks: 95, city: "Thrissur", year: 2020, score: 93, joindate: new Date("2021-06-15") },
@@ -93,19 +56,36 @@ switched to db mca49
 		ObjectId("681854ef77fdcb0ee62b6775")
 	]
 }
+
+4. Retrieve the fields rollno, name, phoneno, marks, city for all the documents in the
+collection student.
+
 > db.student.find({}, { _id: 0, rollno: 1, name: 1, phoneno: 1, marks: 1, city: 1 })
 { "rollno" : 1, "name" : "Sujith", "phoneno" : "9876543210", "marks" : 85, "city" : "Thrissur" }
 { "rollno" : 2, "name" : "Sarayu", "phoneno" : "9123456780", "marks" : 95, "city" : "Thrissur" }
 { "rollno" : 3, "name" : "Ajay", "phoneno" : "9988776655", "marks" : 76, "city" : "Ernakulam" }
 { "rollno" : 4, "name" : "Divya", "phoneno" : "9786543211", "marks" : 91, "city" : "Thrissur" }
 { "rollno" : 5, "name" : "Anil", "phoneno" : "9871234567", "marks" : 67, "city" : "Kochi" }
+
+5. Display the details of students who achieved a score more than 90 and are from
+‘Thrissur’.
+
 > db.student.find({ score: { $gt: 90 }, city: "Thrissur" })
 { "_id" : ObjectId("681854ef77fdcb0ee62b6772"), "rollno" : 2, "name" : "Sarayu", "phoneno" : "9123456780", "marks" : 95, "city" : "Thrissur", "year" : 2020, "score" : 93, "joindate" : ISODate("2021-06-15T00:00:00Z") }
 { "_id" : ObjectId("681854ef77fdcb0ee62b6774"), "rollno" : 4, "name" : "Divya", "phoneno" : "9786543211", "marks" : 91, "city" : "Thrissur", "year" : 2022, "score" : 95, "joindate" : ISODate("2022-07-12T00:00:00Z") }
+
+6. Update the phone number of Sujith in the student collection. Retrieve the updated
+information.
+
 > db.student.updateOne({ name: "Sujith" }, { $set: { phoneno: "9999999999" } })
 { "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+
 > db.student.find({ name: "Sujith" })
 { "_id" : ObjectId("681854ef77fdcb0ee62b6771"), "rollno" : 1, "name" : "Sujith", "phoneno" : "9999999999", "marks" : 85, "city" : "Thrissur", "year" : 2020, "score" : 88, "joindate" : ISODate("2020-04-10T00:00:00Z") }
+
+7. Update the year of course in all the documents in the student collection to 2021. Also
+retrieve the updated information.
+
 > db.student.updateMany({}, { $set: { year: 2021 } })
 { "acknowledged" : true, "matchedCount" : 5, "modifiedCount" : 5 }
 > db.student.find()
@@ -114,23 +94,34 @@ switched to db mca49
 { "_id" : ObjectId("681854ef77fdcb0ee62b6773"), "rollno" : 3, "name" : "Ajay", "phoneno" : "9988776655", "marks" : 76, "city" : "Ernakulam", "year" : 2021, "score" : 80, "joindate" : ISODate("2019-03-10T00:00:00Z") }
 { "_id" : ObjectId("681854ef77fdcb0ee62b6774"), "rollno" : 4, "name" : "Divya", "phoneno" : "9786543211", "marks" : 91, "city" : "Thrissur", "year" : 2021, "score" : 95, "joindate" : ISODate("2022-07-12T00:00:00Z") }
 { "_id" : ObjectId("681854ef77fdcb0ee62b6775"), "rollno" : 5, "name" : "Anil", "phoneno" : "9871234567", "marks" : 67, "city" : "Kochi", "year" : 2021, "score" : 70, "joindate" : ISODate("2023-01-05T00:00:00Z") }
+
+8. Display the city of ‘Sarayu’.
+
 > db.student.find({ name: "Sarayu" }, { _id: 0, city: 1 })
 { "city" : "Thrissur" }
-> db.student.countDocuments({ joindate: { $gt: new Date("2020-05-01") } })
 
+9. Retrieve the number of students who joined after May 2020 from the collection.
+
+> db.student.countDocuments({ joindate: { $gt: new Date("2020-05-01") } })
 3
+
+10. Arrange the name of the students in ascending order along with all the columns.
 > db.student.find().sort({ name: 1 })
 { "_id" : ObjectId("681854ef77fdcb0ee62b6773"), "rollno" : 3, "name" : "Ajay", "phoneno" : "9988776655", "marks" : 76, "city" : "Ernakulam", "year" : 2021, "score" : 80, "joindate" : ISODate("2019-03-10T00:00:00Z") }
 { "_id" : ObjectId("681854ef77fdcb0ee62b6775"), "rollno" : 5, "name" : "Anil", "phoneno" : "9871234567", "marks" : 67, "city" : "Kochi", "year" : 2021, "score" : 70, "joindate" : ISODate("2023-01-05T00:00:00Z") }
 { "_id" : ObjectId("681854ef77fdcb0ee62b6774"), "rollno" : 4, "name" : "Divya", "phoneno" : "9786543211", "marks" : 91, "city" : "Thrissur", "year" : 2021, "score" : 95, "joindate" : ISODate("2022-07-12T00:00:00Z") }
 { "_id" : ObjectId("681854ef77fdcb0ee62b6772"), "rollno" : 2, "name" : "Sarayu", "phoneno" : "9123456780", "marks" : 95, "city" : "Thrissur", "year" : 2021, "score" : 93, "joindate" : ISODate("2021-06-15T00:00:00Z") }
 { "_id" : ObjectId("681854ef77fdcb0ee62b6771"), "rollno" : 1, "name" : "Sujith", "phoneno" : "9999999999", "marks" : 85, "city" : "Thrissur", "year" : 2021, "score" : 88, "joindate" : ISODate("2020-04-10T00:00:00Z") }
+
+11. Rename attribute city as town.
 > db.student.updateMany({}, [
 ...   { $set: { town: "$city" } },
 ...   { $unset: "city" }
 ... ])
 { "acknowledged" : true, "matchedCount" : 5, "modifiedCount" : 5 }
+
+12. Delete the details of the student whose name is ‘Sujith’ from the student collection
 > db.student.deleteOne({ name: "Sujith" })
 { "acknowledged" : true, "deletedCount" : 1 }
-> 
+ 
 
